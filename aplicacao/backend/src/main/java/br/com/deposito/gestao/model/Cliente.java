@@ -1,9 +1,6 @@
 package br.com.deposito.gestao.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
@@ -18,12 +15,14 @@ public class Cliente {
 
     private String nome;
 
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Telefone> contatos;
 
     private String endereço;
 
     private String notas;
 
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.REFRESH, orphanRemoval = true)
     private List<Compra> historico;
 
 }

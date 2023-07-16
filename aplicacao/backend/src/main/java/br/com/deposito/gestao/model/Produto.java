@@ -10,6 +10,7 @@ import lombok.Data;
 @Entity
 @Data
 public class Produto {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,8 +29,7 @@ public class Produto {
 
     private Double precoDeVenda;
 
-    private String barcode;
-
+    private Double precoPromocional;
 
 
 }
