@@ -3,6 +3,7 @@ package br.com.deposito.gestao.model;
 import jakarta.persistence.*;
 import lombok.Data;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -21,5 +22,7 @@ public class Compra {
     private Double valorTotal;
 
     private String notas;
+
+    private LocalDate dataCompra;
 
 }
