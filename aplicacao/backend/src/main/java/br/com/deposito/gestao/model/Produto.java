@@ -18,6 +18,8 @@ public class Produto {
     @NotBlank(message = "Campo Obrigatório")
     private String nome;
 
+    private String descricao;
+    
     @NotBlank(message = "Campo Obrigatório")
     private Double quantidade;
 

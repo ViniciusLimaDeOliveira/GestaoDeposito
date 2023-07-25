@@ -1,6 +1,7 @@
 export interface Produto {
   id: number;
   nome: string;
+  descricao: string;
   quantidade: number;
   precoDeCompra: number;
   porcentagenVenda: number;
@@ -18,4 +19,10 @@ export interface ApplicationError {
   name: string;
   message: string;
   details?: string[];
+}
+
+export interface Notificacao {
+  mensagem: string
+  tipoMensagem: string
+  visibilidade: boolean
 }
