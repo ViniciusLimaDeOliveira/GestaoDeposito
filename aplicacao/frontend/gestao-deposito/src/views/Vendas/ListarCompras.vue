@@ -1,48 +1,36 @@
 <script lang="ts" setup>
 import { reactive } from "vue";
-import { ProdutoService } from "@/api/ProdutoService";
+import { CompraService } from "@/api/CompraService";
 import { Pagination } from "@/api/adapters/BaseAdapters";
 import { DataTableHeader } from "@/Types/vuetify";
-import { InfoDataTableServer, Produto } from "@/Types/index";
+import { InfoDataTableServer, Compra } from "@/Types/index";
 import PaginaPadrao from "@/components/Paginapadrao.vue";
 
 const state = reactive({
-  listaProdutos: [] as Array<Produto>,
+  listaCompras: [] as Array<Compra>,
   pagination: { pageSize: 5 } as Pagination,
   search: "" as string,
   infoDataTableServer: {} as InfoDataTableServer,
 });
 
 const constant: {
-  cabecalhoProdutos: DataTableHeader[];
+  cabecalhoCompras: DataTableHeader[];
   itemsPerPageOptions: any[];
 } = {
-  cabecalhoProdutos: [
-    { title: "Nome", align: "start", sortable: true, key: "nome" },
-    { title: "Quantidade", align: "start", sortable: true, key: "quantidade" },
+  cabecalhoCompras: [
+    { title: "Cliente", align: "start", sortable: true, key: "Cliente" },
+    { title: "Valor Total", align: "start", sortable: true, key: "valorTotal" },
     {
-      title: "Preço de compra",
+      title: "Anotações",
       align: "start",
       sortable: true,
-      key: "precoDeCompra",
+      key: "notas",
     },
     {
-      title: "Porcentagen de venda",
+      title: "Data de compra",
       align: "start",
       sortable: true,
-      key: "porcentagenVenda",
-    },
-    {
-      title: "Preço de venda",
-      align: "start",
-      sortable: true,
-      key: "precoDeVenda",
-    },
-    {
-      title: "Preço promocional",
-      align: "start",
-      sortable: true,
-      key: "precoPromocional",
+      key: "dataCompra",
     },
     { title: "", align: "start", sortable: false, key: "id" },
   ],
@@ -57,13 +45,13 @@ const constant: {
 
 function loadItems({ page, itemsPerPage, sortBy }: InfoDataTableServer) {
   state.infoDataTableServer = { page, itemsPerPage, sortBy };
-  ProdutoService.all({
+  CompraService.all({
     page,
     itemsPerPage,
     sortBy: [{ key: "id", order: "asc" }],
     search: state.search,
   }).then(({ items, pagination }) => {
-    state.listaProdutos = items;
+    state.listaCompras = items;
     state.pagination = pagination;
   });
 }
@@ -78,8 +66,8 @@ function atualizar() {
     <template v-slot:conteudo>
         <v-data-table-server
           :search="state.search"
-          :headers="constant.cabecalhoProdutos"
-          :items="state.listaProdutos"
+          :headers="constant.cabecalhoCompras"
+          :items="state.listaCompras"
           :items-per-page="state.pagination.pageSize"
           :items-length="state.pagination.total"
           :items-per-page-options="constant.itemsPerPageOptions"
@@ -110,13 +98,10 @@ function atualizar() {
           </template>
           <template v-slot:item="{ item }">
             <tr>
-              <td>{{ item.columns.nome }}</td>
-              <td>{{ item.columns.descricao }}</td>
-              <td>{{ item.columns.quantidade }}</td>
-              <td>{{ item.columns.precoDeCompra }}</td>
-              <td>{{ item.columns.porcentagenVenda }}</td>
-              <td>{{ item.columns.precoDeVenda }}</td>
-              <td>{{ item.columns.precoPromocional }}</td>
+              <td>{{ item.columns.Cliente.nome}}</td>
+              <td>{{ item.columns.dataCompra }}</td>
+              <td>{{ item.columns.valorTotal }}</td>
+              <td>{{ item.columns.notas }}</td>
               <td class="d-flex justify-end">
                 <v-btn icon="mdi-pencil" variant="text" color="info" />
                 <v-btn icon="mdi-delete" variant="text" color="error" />

@@ -1,7 +1,6 @@
 <template>
   <PaginaPadrao titulo="Home">
     <template v-slot:conteudo>
-      <v-container>
         <v-row no-gutters>
           <v-col cols="4" sm="2">
             <v-card :to="{ name: 'Produtos.Lista' }" height="150px">
@@ -52,8 +51,6 @@
             </v-card>
           </v-col>
         </v-row>
-        
-      </v-container>
     </template>
   </PaginaPadrao>
 </template>

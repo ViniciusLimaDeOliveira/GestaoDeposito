@@ -19,5 +19,7 @@ public class VendaProduto {
 
     @NotBlank(message = "Campo Obrigatório")
     private Double quantidade;
+    
+    @NotBlank(message = "Campo Obrigatório")
     private Double valor;
 }

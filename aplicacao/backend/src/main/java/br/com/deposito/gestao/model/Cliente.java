@@ -18,7 +18,7 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Telefone> contatos;
 
-    private String endereço;
+    private String endereco;
 
     private String notas;
 
